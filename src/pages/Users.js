@@ -1,9 +1,9 @@
 import React from 'react'
 
 const Users = () => {
-  return (
-    <div>Users</div>
-  )
+  const url = 'https://api.github.com/users/schacon/repos'
+
+  return <div>Users</div>
 }
 
 export default Users
