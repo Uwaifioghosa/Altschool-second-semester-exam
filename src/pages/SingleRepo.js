@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Loading from '../components/Loading';
+import ErrorBoundary from '../components/ErrorBoundary';
+import OurFallbackComponent from '../components/FallBack';
 
 const SingleRepo = () => {
   const { name } = useParams();
@@ -42,56 +44,58 @@ const SingleRepo = () => {
           <meta property='og:title' content={`${name}`} />
           <meta property='og:description' content={`${name}`} />
 
-          {/* change after deploument */}
-          <meta property='og:url' content='https://oshoke.vercel.app/' />
+          <meta
+            property='og:url'
+            content={`https://g-ithub-user-examination.vercel.app/${name}`}
+          />
           <meta property='og:type' content='website' />
           <link rel='preconnect' href='https://fonts.googleapis.com' />
-          <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin />
         </head>
+        <ErrorBoundary FallbackComponent={OurFallbackComponent}>
+          <section className='container'>
+            <Link to='/' className='back'>
+              <span>back to repos</span>
+            </Link>
 
-        <section className='container'>
-          <Link to='/' className='back'>
-            <span>back to repos</span>
-          </Link>
-
-          {loading ? (
-            <Loading />
-          ) : (
-            <div className='single-repo'>
-              <h2 className='single-name'>{name}</h2>
-              <p className='single-desc'>
-                {description || 'description not available'}
-              </p>
-              <div>
-                <span>Stars: {stars}</span>
+            {loading ? (
+              <Loading />
+            ) : (
+              <div className='single-repo'>
+                <h2 className='single-name'>{name}</h2>
+                <p className='single-desc'>
+                  {description || 'description not available'}
+                </p>
+                <div>
+                  <span>Stars: {stars}</span>
+                </div>
+                <div>
+                  <span className='cap'>Visibility: {visibility}</span>
+                </div>
+                <div>
+                  <span className='cap'>
+                    Code:{' '}
+                    <a
+                      href={url}
+                      className='url'
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      github
+                    </a>
+                  </span>
+                </div>
+                <div>
+                  <span className='cap'>
+                    Main language: {language || 'not available'}
+                  </span>
+                </div>
+                <div>
+                  <span className='cap'>Branch: {branch}</span>
+                </div>
               </div>
-              <div>
-                <span className='cap'>Visibility: {visibility}</span>
-              </div>
-              <div>
-                <span className='cap'>
-                  Code:{' '}
-                  <a
-                    href={url}
-                    className='url'
-                    target='_blank'
-                    rel='noreferrer'
-                  >
-                    github
-                  </a>
-                </span>
-              </div>
-              <div>
-                <span className='cap'>
-                  Main language: {language || 'not available'}
-                </span>
-              </div>
-              <div>
-                <span className='cap'>Branch: {branch}</span>
-              </div>
-            </div>
-          )}
-        </section>
+            )}
+          </section>
+        </ErrorBoundary>
       </>
     );
   } else {

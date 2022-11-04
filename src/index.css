@@ -108,7 +108,7 @@ body {
 
 @media (max-width: 46em) {
   html {
-    font-size: 70%;
+    font-size: 75%;
   }
   .container {
     max-width: 30rem;
