@@ -5,8 +5,8 @@
 }
 
 body {
-  background: linear-gradient(90deg, #edc0bf, #c4caef 58%);
-  color: #343a40;
+  background: white;
+  color: black;
 }
 
 .repos {
@@ -150,7 +150,7 @@ body {
 .loader:after {
   position: absolute;
   top: 0;
-  content: '';
+  content: "";
 }
 .loader:before {
   left: -1.5em;
